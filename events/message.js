@@ -24,7 +24,7 @@ exports.run = async (client, msg) => {
     }
 
     cmdFile.run(client, msg, args);
-  } else if (msg.mentions.members.has(client.user.id)) {
+  } else if (msg.mentions.has(client.user)) {
     console.log("I got mentionned !");
     if (msg.author.id === process.env.OWNER_ID) msg.reply(await Nekos.owoify("What do you want master ?"));else msg.reply(await Nekos.owoify(mentionanwsers[Math.floor(Math.random() * mentionanwsers.length)]));
   }

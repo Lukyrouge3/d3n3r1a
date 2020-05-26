@@ -18,7 +18,7 @@ exports.run = async (client, msg, args) => {
   members.each(m => {
     let ch = chan1;
 
-    if (i > Math.floor(members.size / 2)) {
+    if (i >= Math.floor(members.size / 2)) {
       ch = chan2;
     }
 

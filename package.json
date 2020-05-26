@@ -1,0 +1,27 @@
+{
+  "name": "botdiscordjs",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./dist/app.js",
+    "babel": "babel-watch app.js"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
+    "pug": "2.0.0-beta11",
+    "snekfetch": "^4.0.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.8.6",
+    "babel-core": "^6.26.3",
+    "babel-watch": "^7.0.0"
+  }
+}

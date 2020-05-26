@@ -1,4 +1,4 @@
-const Nekos = require('../apis/Nekos');
+const Nekos = require('../apis/nekos');
 
 const chan1 = "714482413840891935",
       chan2 = "714482465854718043";

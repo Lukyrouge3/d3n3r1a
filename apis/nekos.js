@@ -12,19 +12,23 @@ module.exports.addcommands = bot => {
 };
 
 async function cat() {
-    return (await request.get('https://nekos.life/api/v2/cat')).body.cat;
+    let r = (await request.get('https://nekos.life/api/v2/cat')).body.cat;
+    return r;
 }
 
 async function owoify(text) {
-    return (await request.get('https://nekos.life/api/v2/owoify?text=' + text)).body.owo;
+    let r = (await request.get('https://nekos.life/api/v2/owoify?text=' + text)).body.owo;
+    return r;
 }
 
 async function fact() {
-    return (await request.get('https://nekos.life/api/v2/fact')).body.fact;
+    let r = (await request.get('https://nekos.life/api/v2/fact')).body.fact;
+    return r;
 }
 
 async function name() {
-    return (await request.get('https://nekos.life/api/v2/name')).body.name;
+    let r = (await request.get('https://nekos.life/api/v2/name')).body.name;
+    return r;
 }
 
 exports.cat = cat;

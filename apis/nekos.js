@@ -12,23 +12,19 @@ module.exports.addcommands = bot => {
 };
 
 async function cat() {
-    let r = (await request.get('https://nekos.life/api/v2/cat')).body.cat;
-    return r;
+    return (await request.get('https://nekos.life/api/v2/cat')).body.cat;
 }
 
 async function owoify(text) {
-    let r = (await request.get('https://nekos.life/api/v2/owoify?text=' + text)).body.owo;
-    return r;
+    return (await request.get('https://nekos.life/api/v2/owoify?text=' + text)).body.owo;
 }
 
 async function fact() {
-    let r = (await request.get('https://nekos.life/api/v2/fact')).body.fact;
-    return r;
+    return (await request.get('https://nekos.life/api/v2/fact')).body.fact;
 }
 
 async function name() {
-    let r = (await request.get('https://nekos.life/api/v2/name')).body.name;
-    return r;
+    return (await request.get('https://nekos.life/api/v2/name')).body.name;
 }
 
 exports.cat = cat;
@@ -49,7 +45,7 @@ exports.run = async (client, msg, args) => {
     if (c > 10) msg.reply(await owoify('Maximum count is 10, so I sent you 10 !'));
 };
 
-exports.arguments = "<count>";
+// exports.arguments = "<count>";
 
 exports.isNSFW = cmd => {
     let b = false;

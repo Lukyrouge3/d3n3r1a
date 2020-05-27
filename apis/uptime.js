@@ -1,8 +1,7 @@
-const ready = require('../events/ready');
 
 module.exports = class Uptime {
-    constructor() {
-        this.start = ready.start();
+    constructor(start) {
+        this.start = start;
     }
 
     uptime() {
@@ -16,4 +15,8 @@ module.exports = class Uptime {
         let milis = Math.floor(this.diff);
         return {h: h, m: m, s: s, milis: milis};
     }
+    //
+    // reload() {
+    //     this.start = ready.start();
+    // }
 };

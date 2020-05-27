@@ -18,4 +18,8 @@ module.exports.addCommand = (name, msg) => {
     Command.forge({name: name, user_id: user_id, timestamp: timestamp, channel_id: channel_id}).save();
 };
 
+module.exports.getCommands = () => {
+    return Command.fetchAll();
+};
+
 //REPLACE INTO commands (name, count) VALUES ("test", +1)

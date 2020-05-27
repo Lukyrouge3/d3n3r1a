@@ -7,3 +7,5 @@ exports.run = async (client, msg, args) => {
 
 exports.help = "Get the current voice channel id";
 exports.category = "Dev";
+
+exports.isHidden = true;

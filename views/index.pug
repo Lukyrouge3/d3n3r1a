@@ -1,6 +1,9 @@
-extends layout
-
-block content
-  h1= title
-  p Welcome to #{title}
-  span #{nekos}
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src="https://code.jquery.com/jquery-3.5.1.min.js")
+    script(src="/javascripts/home.js")
+  body
+    h2 Uptime:

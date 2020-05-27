@@ -40,7 +40,11 @@ $(document).ready(() => {
                 borderWidth: 0
             }],
             options: {
-                responsive: false
+                responsive: false,
+                title: {
+                    display: true,
+                    text: 'Commands used total'
+                }
             }
         }
     })

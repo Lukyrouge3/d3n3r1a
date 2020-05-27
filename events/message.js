@@ -1,6 +1,7 @@
 const COMMAND_PREFIX = process.env.PREFIX;
 
 const Nekos = require('../apis/nekos');
+const database = require('../apis/database');
 
 exports.run = async (client, msg) => {
   // if (msg.author.bot) return;
@@ -24,6 +25,7 @@ exports.run = async (client, msg) => {
     }
 
     cmdFile.run(client, msg, args);
+    database.addCommand(cmd, msg);
   } else if (msg.mentions.has(client.user)) {
     console.log("I got mentionned !");
     if (msg.author.id === process.env.OWNER_ID) msg.reply(await Nekos.owoify("What do you want master ?"));else msg.reply(await Nekos.owoify(mentionanwsers[Math.floor(Math.random() * mentionanwsers.length)]));

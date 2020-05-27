@@ -6,12 +6,13 @@ const request = require('snekfetch');
 
 router.get('/', async function (req, res, next) {
     request.get('https://jsonplaceholder.typicode.com/todos/1').then(n => {
+        console.log(n);
         res.render('index', {
             title: 'Express',
             nekos: n.body.cat
-        }, abort => {
-          res.render(abort);
-        });
+        })
+    }, abort => {
+        console.log(abort);
     });
 });
 module.exports = router;

@@ -7,7 +7,7 @@ const database = require('../apis/database');
 
 router.get('/', async function (req, res, next) {
     res.render('index', {
-        title: 'Yamete Sempaii',
+        title: 'Yamete Sempaiii',
         commands: await database.getCommands()
     })
 });

@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
-    "babel": "babel-watch app.js"
+    "babel": "babel-watch app.js",
+    "babel-test": "babel-watch test.js"
   },
   "engines": {
     "node": "12.16.1",

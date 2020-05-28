@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 
-const Nekos = require('../apis/nekos');
+const Nekos = require('../../apis/nekos');
 const hidden = ['Dev'];
 
 exports.run = async (client, msg, args) => {
@@ -13,7 +13,9 @@ exports.run = async (client, msg, args) => {
             i = 0;
         cmds.forEach(command => {
             let cmd = commands.get(command);
-            if (!cmd.isHidden && (cmd.isNSFW === undefined || cmd.isNSFW(command) && msg.channel.nsfw || !cmd.isNSFW(command))) {
+            if ((cmd.hasPermission === undefined || cmd.hasPermission(msg.member))
+                && !cmd.isHidden
+                && (cmd.isNSFW === undefined || cmd.isNSFW(command) && msg.channel.nsfw || !cmd.isNSFW(command))) {
                 if (str[i].length > 1000) {
                     i++;
                     str[i] = "";

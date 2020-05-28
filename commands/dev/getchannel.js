@@ -1,4 +1,4 @@
-const Nekos = require('../apis/nekos');
+const Nekos = require('../../apis/nekos');
 
 exports.run = async (client, msg, args) => {
   msg.reply("Check you console, master !!");

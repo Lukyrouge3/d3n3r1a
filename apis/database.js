@@ -1,7 +1,11 @@
 const knex = require('knex')({
-    client: 'sqlite3',
+    client: 'mysql',
     connection: {
-        filename: "./db.sqlite"
+        host: "us-cdbr-east-05.cleardb.net",
+        user: "b8af259df30cf4",
+        password: "2683195d",
+        database: "heroku_f9093320906c85a",
+        charset: 'utf8'
     }
 });
 
@@ -12,6 +16,7 @@ const Command = bookshelf.model('Command', {
 });
 
 module.exports.addCommand = (name, msg) => {
+    console.log(process.env.DATABASE_HOST);
     let user_id = msg.author.id
         , timestamp = Date.now()
         , channel_id = msg.channel.id;

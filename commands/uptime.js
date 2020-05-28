@@ -1,10 +1,10 @@
 const Nekos = require('../apis/nekos');
 
-const Uptime = require('../apis/uptime');
+const Uptime = require('../app').Uptime;
+
 
 exports.run = async (client, msg, args) => {
-    let up = new Uptime();
-    let u = up.uptime();
+    let u = Uptime.uptime();
     let hours = u.h === 0 ? "" : (u.h + "hours "), minutes = u.m === 0 ? "" : (u.m + "minutes "),
         seconds = u.s === 0 ? "" : (u.s + "seconds ");
 

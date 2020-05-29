@@ -19,4 +19,5 @@ exports.arguments = "<count>";
 
 exports.isHidden = true;
 exports.hasPermission = hasPermission;
+exports.coolDown = 2000;
 //MANAGE_MESSAGES, true, true

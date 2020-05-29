@@ -24,7 +24,7 @@ exports.run = async (client, msg) => {
             msg.reply('This command must be used in a NSFW channel to protect 11years old people !');
             return;
         }
-        if (!CoolDown.isOnCoolDown(msg.author, cmd) || msg.member.hasPermission("ADMINISTRATOR")) {
+        if (!CoolDown.isOnCoolDown(msg.author, cmd)) {
             cmdFile.run(client, msg, args);
             database.addCommand(cmd, msg);
             await CoolDown.addCoolDown(msg.author, cmd, cmd.coolDown);

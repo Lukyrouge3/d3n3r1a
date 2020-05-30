@@ -30,7 +30,8 @@ exports.run = async (client, msg) => {
             await CoolDown.addCoolDown(msg.author, cmd, cmd.coolDown);
         } else msg.reply('You\'re on cooldown');
     } else if (msg.mentions.has(client.user)) {
-        console.log("I got mentionned !");
-        if (msg.author.id === process.env.OWNER_ID) msg.reply(await Nekos.owoify("What do you want master ?")); else msg.reply(await Nekos.owoify(mentionanwsers[Math.floor(Math.random() * mentionanwsers.length)]));
+        // console.log("I got mentionned !");
+        if (msg.author.id === process.env.OWNER_ID) msg.reply(await Nekos.owoify("What do you want master ?"));
+        else msg.reply(await Nekos.owoify(mentionanwsers[Math.floor(Math.random() * mentionanwsers.length)]));
     }
 };

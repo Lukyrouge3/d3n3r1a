@@ -40,7 +40,7 @@ exports.run = async (client, msg, args) => {
     let msgArr = msg.content.split(" ");
     let cmd = msgArr[0].slice(COMMAND_PREFIX.length);
     let c = 1;
-    if (isNaN(args[0])) c = Math.min(args[0], 10);
+    if (!isNaN(args[0])) c = Math.min(args[0], 10);
     for (let i = 0; i < c; i++) {
         request.get('https://nekos.life/api/v2/img/' + cmd).then(async r => {
             let embed = new Discord.MessageEmbed().setTitle(await owoify('Here is for you !')).setImage(r.body.url).setAuthor(await cat(), process.env.AVATAR).setColor(0xFFFFFF).setFooter((await owoify('Requested by ')) + " " + msg.author.username + " " + (await cat()));

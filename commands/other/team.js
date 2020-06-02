@@ -32,4 +32,4 @@ exports.run = async (client, msg, args) => {
 };
 
 exports.help = "Create random teams to play custom game. In order to do that, all players must be in the same channel than the sender.";
-exports.category = "Autre";
+exports.category = "Other";

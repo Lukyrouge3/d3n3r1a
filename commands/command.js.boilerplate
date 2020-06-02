@@ -1,0 +1,10 @@
+const Nekos = require('../../apis/nekos');
+
+exports.run = async (client, msg, args) => {
+    throw new Error('Not implemented');
+};
+
+exports.help = "Default help";
+exports.category = "Other";
+
+exports.isHidden = false;

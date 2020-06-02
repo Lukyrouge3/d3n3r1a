@@ -40,4 +40,4 @@ exports.isNSFW = () => {
 };
 
 exports.help = "Help command";
-exports.category = "Autre";
+exports.category = "Other";

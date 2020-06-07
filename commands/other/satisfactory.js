@@ -1,6 +1,6 @@
 const Nekos = require('../../apis/nekos');
 const moment = require('moment');
-const release = moment('2020-06-08 23:59');
+const release = moment('2020-06-08 21:00');
 exports.run = async (client, msg, args) => {
     let diff = release.diff(moment(), 'hours');
     let diff_day = release.diff(moment(), 'days');

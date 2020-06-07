@@ -21,7 +21,7 @@ exports.run = async (client, msg, args) => {
                     str[i] = "";
                 }
 
-                str[i] += "\n **-" + command + "**";
+                str[i] += "\n **" + command + "**";
                 if (cmd.help !== undefined) str[i] += ": " + cmd.help;
                 if (cmd.arguments !== undefined) str[i] += "\n**Arguments**: `" + cmd.arguments + "`";
             }

@@ -16,7 +16,6 @@ const Command = bookshelf.model('Command', {
 });
 
 module.exports.addCommand = (name, msg) => {
-    console.log(process.env.DATABASE_HOST);
     let user_id = msg.author.id
         , timestamp = Date.now()
         , channel_id = msg.channel.id;

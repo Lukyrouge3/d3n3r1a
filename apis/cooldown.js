@@ -7,15 +7,17 @@ module.exports = class CoolDown {
     }
 
     async addCoolDown(user, command, time = 10000) {
-        return new Promise(resolve => {
-            let cd = this.cooldown.get(user.id) || [];
-            cd.push(command);
-            this.cooldown.set(user.id, cd);
-            setTimeout(() => {
-                this.removeCoolDown(user, command);
-                resolve(true);
-            }, time);
-        });
+        if (process.env.COOLDOWN) {
+            return new Promise(resolve => {
+                let cd = this.cooldown.get(user.id) || [];
+                cd.push(command);
+                this.cooldown.set(user.id, cd);
+                setTimeout(() => {
+                    this.removeCoolDown(user, command);
+                    resolve(true);
+                }, time);
+            });
+        }
     }
 
     async removeCoolDown(user, command) {
@@ -25,7 +27,6 @@ module.exports = class CoolDown {
     }
 
     isOnCoolDown(user, command) {
-        console.log(this.cooldown);
         let cd = this.cooldown.get(user.id) || [];
         for (let i = 0; i < cd.length; i++) if (cd[i] === command) return true;
         return false;

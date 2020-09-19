@@ -21,10 +21,7 @@ module.exports.Bot = class Bot {
         this._loadEvents();
 
         this.client.login(token).then().catch(reason => console.log(reason));
-        this.client.guilds.cache.each(g => console.log(g.name));
-        console.log(this.client.guilds.cache.map(g => {
-            console.log(g.name);
-        }));
+
     }
 
     _loadCommands() {

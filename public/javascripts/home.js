@@ -47,5 +47,14 @@ $(document).ready(() => {
                 }
             }
         }
-    })
+    });
+    console.log(commands);
+    let newComs = [];
+    for (let i = 0; i < commands.length; i++) {
+        if (newComs[commands[i].name]) newComs[commands[i].name] += 1;
+        else newComs[commands[i].name] = 1;
+    }
+    for (let c in newComs) {
+        $('.commands').append('<tr><td>' + c + '</td><td>' + newComs[c] + '</td></tr>')
+    }
 });

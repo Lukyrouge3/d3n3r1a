@@ -6,9 +6,11 @@ const database = require('../apis/database');
 /* GET home page. */
 
 router.get('/', async function (req, res, next) {
+    let commands = await database.getCommands();
     res.render('index', {
         title: 'Yamete Sempaiii',
-        commands: await database.getCommands()
+        commands: commands,
+        total: await commands.count()
     })
 });
 module.exports = router;

@@ -14,5 +14,13 @@ html
             span#hours
             span#minutes
             span#seconds
+            p Total commands used : #{total}
         div.canvas-container
             canvas#commands(width="200px", height="200px")
+        div.table
+            table
+                thead
+                    tr
+                        th Command
+                        th Count
+                tbody.commands

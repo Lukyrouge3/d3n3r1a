@@ -1,6 +1,7 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  display: flex;
 }
 
 a {
@@ -9,8 +10,31 @@ a {
 
 .uptime span {
   padding: 0 5px;
+  max-width: 10%;
 }
 
 .canvas-container {
+  width: 50%;
+}
+
+.table {
   width: 40%;
+}
+
+.table table {
+  width: 100%;
+}
+
+.table table, .table th, .table td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.table td {
+  padding: 10px 0 10px 10px;
+  text-transform: capitalize;
+}
+
+.table th {
+  text-align: center;
 }

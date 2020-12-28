@@ -21,7 +21,6 @@ module.exports.Bot = class Bot {
         this._loadEvents();
 
         this.client.login(token).then().catch(reason => console.log(reason));
-
     }
 
     _loadCommands() {
@@ -37,7 +36,7 @@ module.exports.Bot = class Bot {
                     return;
                 }
                 if (!file.name.endsWith('.js')) return;
-                console.log('Loading command:', path + `${file.name}`);
+                // console.log('Loading command:', path + `${file.name}`);
                 let props = require(path + `${file.name}`);
                 let commandName = file.name.split('.')[0];
                 this.addCommand(props, commandName);
@@ -57,7 +56,7 @@ module.exports.Bot = class Bot {
             if (err) console.log(err);
             files.forEach(file => {
                 let eventFunc = require(`./events/${file}`);
-
+                // console.log('Loading event:', `${file}`);
                 let eventName = file.split(".")[0];
                 this.client.on(eventName, (...args) => eventFunc.run(this.client, ...args));
             });

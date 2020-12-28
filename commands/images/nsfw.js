@@ -10,5 +10,7 @@ exports.run = async (client, msg, args) => {
 
 exports.help = "Trigger a random nsfw command.";
 exports.category = "NSFW";
-
+exports.isNSFW = () => {
+    return true
+};
 exports.isHidden = false;

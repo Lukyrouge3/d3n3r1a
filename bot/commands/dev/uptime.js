@@ -1,6 +1,6 @@
 const Nekos = require('../../apis/nekos');
 
-const Uptime = require('../../app').Uptime;
+const Uptime = require('../../../app').Uptime;
 
 
 exports.run = async (client, msg, args) => {

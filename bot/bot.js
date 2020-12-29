@@ -3,8 +3,8 @@ const token = process.env.TOKEN;
 const fs = require("fs");
 
 const Discord = require('discord.js');
-
 const Nekos = require('./apis/nekos');
+const Kitsu = require('./apis/kitsu');
 
 module.exports.Bot = class Bot {
     constructor() {
@@ -21,6 +21,9 @@ module.exports.Bot = class Bot {
         this._loadEvents();
 
         this.client.login(token).then().catch(reason => console.log(reason));
+
+        //Load needed apis
+        Kitsu.setlast();
     }
 
     _loadCommands() {
@@ -28,7 +31,7 @@ module.exports.Bot = class Bot {
     }
 
     _loadDir(path) {
-        fs.readdir(path, {withFileTypes: true}, (err, files) => {
+        fs.readdir('./bot/' + path, {withFileTypes: true}, (err, files) => {
             if (err) return console.log(err);
             files.forEach(file => {
                 if (file.isDirectory()) {
@@ -52,10 +55,10 @@ module.exports.Bot = class Bot {
     }
 
     _loadEvents() {
-        fs.readdir('./events/', (err, files) => {
+        fs.readdir('./bot/events/', (err, files) => {
             if (err) console.log(err);
             files.forEach(file => {
-                let eventFunc = require(`./events/${file}`);
+                let eventFunc = require(`./events/` + file);
                 // console.log('Loading event:', `${file}`);
                 let eventName = file.split(".")[0];
                 this.client.on(eventName, (...args) => eventFunc.run(this.client, ...args));

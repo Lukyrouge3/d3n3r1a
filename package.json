@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node app.js",
     "babel": "babel-watch app.js",
-    "babel-test": "babel-watch test.js"
+    "babel-test": "babel-watch sandbox/test.js"
   },
   "engines": {
     "node": "12.16.1",
@@ -32,6 +32,7 @@
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
     "babel-core": "^6.26.3",
-    "babel-watch": "^7.0.0"
+    "babel-watch": "^7.0.0",
+    "xmlhttprequest": "^1.8.0"
   }
 }

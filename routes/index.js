@@ -2,7 +2,7 @@ var express = require('express');
 
 var router = express.Router();
 const request = require('snekfetch');
-const database = require('../apis/database');
+const database = require('../bot/apis/database');
 /* GET home page. */
 
 router.get('/', async function (req, res, next) {

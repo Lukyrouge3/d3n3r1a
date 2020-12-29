@@ -1,4 +1,4 @@
-const Uptime = require('./app').Uptime;
+const Uptime = require('../app').Uptime;
 
 module.exports.run = (io) => {
     io.on('connection', socket => {

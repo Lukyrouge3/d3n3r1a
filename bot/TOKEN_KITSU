@@ -1,0 +1,10 @@
+{
+  access_token: 'ae5a31373cb0f50a282934537189e0a968e53c0907660cf04dcedd7f87bae196',
+  token_type: 'Bearer',
+  expires_in: 2591895,
+  refresh_token: 'b5a948b3cd8bfb6639550c6108e2a5245d8186a235b1228ebe33cfa1da9027ee',
+  scope: 'public',
+  created_at: 1609260588
+}
+
+Process finished with exit code 0

@@ -9,10 +9,17 @@ exports.run = async (client, msg, args) => {
     } else {
         switch (args[0]) {
             case 'random':
-                //Kitsu.random();
+                msg.reply(Kitsu.renderAnime(await Kitsu.random()));
                 break;
             case 'search':
-
+                if (args.length >= 2) {
+                    let s = "";
+                    for (let i = 1; i<args.length; i++) s += args[i] + "+";
+                    let anime = await Kitsu.search(s);
+                    if (anime.data != [] && anime.data) {
+                        msg.reply(Kitsu.renderAnime(anime));
+                    } else msg.reply("Can't find any anime with this filter !");
+                } else msg.reply("You didn't tell me what i have to search !");
                 break;
             default:
                 //Help

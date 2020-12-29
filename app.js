@@ -44,8 +44,8 @@ app.use(function (err, req, res, next) {
 
 module.exports = app;
 
-const Bot = new (require('./bot').Bot)();
-module.exports.bot = Bot;
+// const Bot = new (require('./bot').Bot)();
+// module.exports.bot = Bot;
 module.exports.Uptime = Uptime;
 let io = require('socket.io').listen(app.listen(process.env.PORT || 5000));
 let socket = require('./socket');

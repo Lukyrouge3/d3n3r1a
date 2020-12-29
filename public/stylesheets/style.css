@@ -17,24 +17,24 @@ a {
   width: 50%;
 }
 
-.table {
+#sortable {
   width: 40%;
 }
 
-.table table {
+.sortable {
   width: 100%;
 }
 
-.table table, .table th, .table td {
+.sortable table, .sortable th, .sortable td {
   border: 1px solid black;
   border-collapse: collapse;
 }
 
-.table td {
+.sortable td {
   padding: 10px 0 10px 10px;
   text-transform: capitalize;
 }
 
-.table th {
+.sortable th {
   text-align: center;
 }

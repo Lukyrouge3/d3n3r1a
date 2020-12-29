@@ -1,0 +1,25 @@
+.sortable, .sortable th, .sortable td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.sortable {
+    /*width: 100%;*/
+}
+
+.sortable th {
+    text-transform: capitalize;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.sortable td {
+    padding: 10px;
+}
+
+.r::after {
+    content: " ▼";
+}
+.s::after {
+    content: " ▲";
+}

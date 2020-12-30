@@ -27,7 +27,7 @@ module.exports.renderAnime = anime => {
     embed.setAuthor(anime.attributes.titles.ja_jp, anime.attributes.posterImage.tiny, "https://kitsu.io/anime/" + anime.id)
         .setTitle(anime.attributes.titles.en_jp)
         .setImage(anime.attributes.coverImage ? anime.attributes.coverImage.small : anime.attributes.posterImage.medium)
-        .addField("Synopsis", anime.attributes.synopsis)
+        .addField("Synopsis", trim(anime.attributes.synopsis))
         .setThumbnail(anime.attributes.posterImage.medium);
     if (anime.attributes.description !== anime.attributes.synopsis) embed.setDescription(anime.attributes.description);
     embed.addField("Episode count", anime.attributes.episodeCount, true);
@@ -41,3 +41,10 @@ module.exports.setlast = async () => {
     let l = r.links.last.split('=');
     last = l[l.length - 1];
 };
+
+function trim(str) {
+    if (str.length >= 1024) {
+        str = str.substring(0, 1000) + "...";
+    }
+    return str;
+}

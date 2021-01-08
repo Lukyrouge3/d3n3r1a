@@ -4,11 +4,14 @@ const Nekos = require('../apis/nekos');
 const CoolDown = new (require('../apis/cooldown'))();
 const database = require('../apis/database');
 
+let mutedMembers = [];
+let disabledMembers = [];
+
 exports.run = async (client, msg) => {
     // if (msg.author.bot) return;
     const mentionanwsers = ["Stop mentioning me ! Im quite busy right now !", "Im not your girlfriend stop talking to me !", "Im not a toy im currently being cute so stop pinging me !"];
 
-    if (msg.content.startsWith(COMMAND_PREFIX)) {
+    if (msg.content.startsWith(COMMAND_PREFIX) && !disabled(msg.member.id)) {
         let msgArr = msg.content.split(" ");
         let cmd = msgArr[0].slice(COMMAND_PREFIX.length);
         let args = msgArr.slice(1);
@@ -29,9 +32,34 @@ exports.run = async (client, msg) => {
             database.addCommand(cmd, msg);
             await CoolDown.addCoolDown(msg.author, cmd, cmd.coolDown);
         } else msg.reply('You\'re on cooldown');
-    } else if (msg.mentions.has(client.user)) {
-        // console.log("I got mentionned !");
-        // if (msg.author.id === process.env.OWNER_ID) msg.reply(await Nekos.owoify("What do you want master ?"));
-        // else msg.reply(await Nekos.owoify(mentionanwsers[Math.floor(Math.random() * mentionanwsers.length)]));
+    }
+    if (muted(msg.member.id)) {
+        await msg.delete();
     }
 };
+
+exports.mute = (member) => {
+    if (!muted(member.id)) mutedMembers.push(member.id);
+};
+
+exports.disable = (member) => {
+    if (!disabled(member)) disabledMembers.push(member.id);
+};
+
+function muted(id) {
+    for (let i = 0; i < mutedMembers.length; i++) if (mutedMembers[i] === id) return true;
+    return false;
+}
+
+exports.unmute = (id) => {
+    for (let i = 0; i < mutedMembers.length; i++) if (mutedMembers[i] === id) mutedMembers.splice(i, 1);
+};
+
+exports.undisable = (id) => {
+    for (let i = 0; i < disabledMembers.length; i++) if (disabledMembers[i] === id) disabledMembers.splice(i, 1);
+};
+
+function disabled(id) {
+    for (let i = 0; i < disabledMembers.length; i++) if (disabledMembers[i] === id) return true;
+    return false;
+}

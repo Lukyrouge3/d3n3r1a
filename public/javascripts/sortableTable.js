@@ -1,4 +1,4 @@
-const MAX_PER_PAGE = 25;
+const MAX_PER_PAGE = 10;
 
 let tbodyEl, table, keys, index = 0, filteredTable;
 

@@ -1,25 +1,39 @@
+@charset "UTF-8";
 .sortable, .sortable th, .sortable td {
-    border: 1px solid black;
-    border-collapse: collapse;
-}
-
-.sortable {
-    /*width: 100%;*/
+  border: 1px solid black;
+  border-collapse: collapse;
 }
 
 .sortable th {
-    text-transform: capitalize;
-    padding: 15px;
-    cursor: pointer;
+  text-transform: capitalize;
+  padding: 15px;
+  cursor: pointer;
 }
-
 .sortable td {
-    padding: 10px;
+  padding: 10px;
 }
 
 .r::after {
-    content: " ▼";
+  content: " ▼";
 }
+
 .s::after {
-    content: " ▲";
+  content: " ▲";
 }
+
+#page1, #page2 {
+  padding: 5px 10px;
+  background: white;
+  border: none;
+  appearance: none;
+  margin: 5px;
+}
+#page1:focus, #page2:focus {
+  outline: none;
+}
+#page1:hover, #page2:hover {
+  background: #eeeeee;
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=sortableTable.css.map */

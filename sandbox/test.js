@@ -1,4 +1,4 @@
-const Power4 = require('../bot/games/power4/power4').Power4;
+const Power4 = require('../bot/games/power4/power4').game;
 
 const p4 = new Power4();
 p4.play(1, 1);

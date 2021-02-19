@@ -20,3 +20,5 @@ class Player {
         return this.scores[game].wins / (this.scores[game].wins + this.scores[game].loses);
     }
 }
+
+module.exports = Player;

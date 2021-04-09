@@ -8,7 +8,7 @@ exports.run = async (client, msg, args) => {
     if (diff < 0)
         str = "Le serveur à commencé depuis " + Math.abs(diff) + "h (" + Math.abs(diff_day) + " jours)";
     else
-        str = "Le serveur ouvre dans " + diff + "h (" + diff_day + " jours)";
+        str = "Le serveur TemporisV ouvre dans " + diff + "h (" + diff_day + " jours)";
     msg.reply(str);
 };
 

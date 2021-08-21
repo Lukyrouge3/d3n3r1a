@@ -6,6 +6,10 @@ const Discord = require('discord.js');
 const Nekos = require('./apis/nekos');
 const Kitsu = require('./apis/kitsu');
 
+const channelToBroadcastTwitch = [{ guildId: '490955681197981715', channelId: '612355291010564104' },
+{ guildId: '714232671089459282', channelId: '714232671840108568' }
+];
+
 module.exports.Bot = class Bot {
     constructor() {
         this.client = new Discord.Client();
@@ -31,7 +35,7 @@ module.exports.Bot = class Bot {
     }
 
     _loadDir(path) {
-        fs.readdir('./bot/' + path, {withFileTypes: true}, (err, files) => {
+        fs.readdir('./bot/' + path, { withFileTypes: true }, (err, files) => {
             if (err) return console.log(err);
             files.forEach(file => {
                 if (file.isDirectory()) {
@@ -64,6 +68,19 @@ module.exports.Bot = class Bot {
                 this.client.on(eventName, (...args) => eventFunc.run(this.client, ...args));
             });
         });
+    }
+
+    async streamOnline() {
+        // (await Bot.bot.client.guilds.fetch('490955681197981715')).channels.cache.get('793199464121630771').send("Skyloudlol is online here: https://www.twitch.tv/skyloudlol");
+        // // (await Bot.bot.client.guilds.fetch('714232671089459282')).channels.cache.get('714232671840108568').send("Skyloudtv is online here: https://www.twitch.tv/skyloudlol");
+        for (let e of channelToBroadcastTwitch) {
+            this.client.guilds.cache.get(e.guildId).channels.cache.get(e.channelId).send('https://www.twitch.tv/skyloudlol is online ! ' + await Nekos.cat());
+        }
+        this.client.user.setActivity('https://www.twitch.tv/skyloudlol', { type: 'WATCHING' });
+    }
+
+    streamOffline() {
+        this.client.user.setActivity(process.env.PREFIX, { type: 'WATCHING' });
     }
 
 };

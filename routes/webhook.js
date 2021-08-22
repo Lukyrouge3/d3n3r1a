@@ -6,11 +6,9 @@ const router = express.Router();
 /* GET users listing. */
 
 router.all('/callback', async function (req, res, next) {
-    console.log(Bot);
     if (req.body.challenge)
         res.send(req.body.challenge);
     if (req.body.subscription.type === "stream.online") {
-        
         Bot.bot.streamOnline();
     } else if (req.body.subscription.type === "stream.offline") {
         Bot.bot.streamOffline();

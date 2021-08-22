@@ -72,7 +72,7 @@ module.exports.Bot = class Bot {
     }
 
     async streamOnline() {
-        if (new Date().getTime() - this.streamTime > 30000) {
+        if (new Date().getTime() - this.streamTime > 10*60*1000) {
             this.streamTime = new Date().getTime();
             for (let e of channelToBroadcastTwitch) {
                 this.client.guilds.cache.get(e.guildId).channels.cache.get(e.channelId).send('https://www.twitch.tv/skyloudlol is online ! ' + await Nekos.cat());

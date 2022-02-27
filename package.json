@@ -27,6 +27,7 @@
     "nerdamer": "^1.1.13",
     "plotly.js-dist": "^2.9.0",
     "plotly.js-dist-min": "^2.9.0",
+    "pug": "^3.0.2",
     "sharp": "^0.30.1",
     "snekfetch": "^4.0.4",
     "sqlite3": "^5.0.2",

@@ -6,7 +6,7 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 
 const app = express();
-const indexRouter = require('./routes/index');
+const indexRouter = require('./web/routes/index');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -42,3 +42,4 @@ app.use(function (err, req, res, next) {
 });
 
 app.listen(process.env.PORT || 5000)
+console.log("Listening to port", process.env.PORT || 5000)

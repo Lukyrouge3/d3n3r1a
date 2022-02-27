@@ -6,6 +6,7 @@ import {ApplicationCommandPermissionTypes} from "discord.js/typings/enums";
 import {addCommand} from "./apis/database";
 
 require('dotenv').config(); // DOTENV setup
+require('./web.ts');
 
 console.time("Time to start");
 

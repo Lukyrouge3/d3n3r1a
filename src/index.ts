@@ -36,22 +36,23 @@ const client = new CustomClient({intents: [Intents.FLAGS.GUILDS]});
 client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 
-    client.commands.filter(cmd => cmd.permissions.length > 0).forEach(cmd => {
-        client.guilds.cache.each(async g => {
-            (await (g.commands.fetch())).filter(c => c.name === cmd.data.name).each(c => {
-                cmd.permissions.forEach(p => {
-                    let roles = g.roles.cache.filter(r => r.permissions.has(p));
-                    roles.each(r => c.permissions.add({
-                        permissions: [{
-                            type: ApplicationCommandPermissionTypes.ROLE,
-                            permission: true,
-                            id: r.id
-                        }]
-                    }))
-                });
-            })
-        });
-    });
+    // client.commands.filter(cmd => cmd.permissions.length > 0).forEach(cmd => {
+    //     client.guilds.cache.each(async g => {
+    //         (await (g.commands.fetch())).filter(c => c.name === cmd.data.name).each(c => {
+    //             cmd.permissions.forEach(p => {
+    //                 let roles = g.roles.cache.filter(r => r.permissions.has(p));
+    //                 roles.each(r => c.permissions.add({
+    //                     permissions: [{
+    //                         type: ApplicationCommandPermissionTypes.ROLE,
+    //                         permission: true,
+    //                         id: r.id
+    //                     }]
+    //                 }))
+    //             });
+    //         })
+    //     });
+    // });
+    //DEPRECATED !
 
     console.timeEnd("Time to start");
 });

@@ -29,6 +29,5 @@ export async function deploy(rest, client) {
         else await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), {body: commands.map(c => c.data.toJSON())});
     } catch (error) {
         console.error(error);
-        console.log(process.env.CLIENT_ID, process.env.DEV_GUILD);
     }
 }

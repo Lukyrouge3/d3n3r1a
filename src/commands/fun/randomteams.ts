@@ -9,7 +9,7 @@ const cmd = new Command('randomteams', 'Generate random teams with the users in 
     if (i.member.voice.channel && i.member.voice.channel.members.size >= teamsCount) {
         const members = i.member.voice.channel.members;
         const teams = [];
-        for (let i = 0; i < teamsCount; i++) {
+        for (let i = 0; i < teamsCount-1; i++) {
             const possibleMembers = members.filter(m => !teams.flat().includes(m));
             for (let j = 0; j < Math.floor(members.size / teamsCount); j++) {
                 const member = possibleMembers.random();
@@ -17,6 +17,7 @@ const cmd = new Command('randomteams', 'Generate random teams with the users in 
                 teams[i].push(member);
             }
         }
+        teams.push(members.filter(m => !teams.flat().includes(m)));
         const embed = new MessageEmbed();
         embed.setTitle("Random teams");
         embed.setColor("RANDOM");

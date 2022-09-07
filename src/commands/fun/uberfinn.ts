@@ -34,6 +34,7 @@ const cmd = new Command('uberfinn', 'Creates an order for Finn to deliver', asyn
     const collector = finn.user.dmChannel.createMessageComponentCollector({filter, time: 3600000});
     collector.on('collect', async i2 => {
         i.editReply({content: 'Order accepted', embeds: [embed], components: []});
+        i.user.send("Order accepted");
         msg.edit({content: 'Order accepted', embeds: [embed], components: []});
     });
 });
@@ -46,6 +47,6 @@ cmd.data.addNumberOption(o => o.setName('price').setDescription('The price of th
 cmd.data.addStringOption(o => o.setName('order').setDescription('The item(s) to order').setRequired(true));
 cmd.data.addStringOption(o => o.setName('location').setDescription('The address to go pickup to').setRequired(true));
 cmd.data.addStringOption(o => o.setName('address').setDescription('The address to deliver to').setRequired(true));
-cmd.data.addNumberOption(o => o.setName('tip').setDescription('The tip for Finn').setRequired(false));
+cmd.data.addNumberOption(o => o.setName('tip').setDescription('The tip for Finn').setRequired(true));
 
 export default cmd;

@@ -4,14 +4,14 @@ import {adminPay, getBalance, getLastPayday, getMemberCommands, paycheck} from "
 import {EmbedBuilder} from "discord.js";
 
 export default new Command('payday', `Get your current daily paycheck`, async i => {
-    const lastPayday = await getLastPayday(i.member.id);
+    const lastPayday = await getLastPayday(i.user.id);
     if (lastPayday.length == 0 || lastPayday[0].data().time.seconds < Math.floor(Date.now() / 1000) - 86400) {
-        await paycheck(i.member.id);
+        await paycheck(i.user.id);
         const embed = new EmbedBuilder();
         embed.setTitle("Payday");
         embed.setColor(0x00ff00);
         embed.setDescription(`You received ${config.DEFAULT_PAYCHECK} ${config.MONEY_SYMBOL}.`);
-        embed.setFooter({text: `Your current balance is ${await getBalance(i.member.id)} ${config.MONEY_SYMBOL}.`});
+        embed.setFooter({text: `Your current balance is ${await getBalance(i.user.id)} ${config.MONEY_SYMBOL}.`});
         i.reply({embeds: [embed], ephemeral: true});
     } else {
         const embed = new EmbedBuilder();

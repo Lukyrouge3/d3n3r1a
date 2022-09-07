@@ -19,44 +19,44 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-export async function addCommand(command: string, guild: string, member: string, args: string | null = null) {
+export async function addCommand(command: string, guild: string, user: string, args: string | null = null) {
     const res = await addDoc(collection(db, "commands"), {
         command,
         guild,
-        member,
+        user,
         args,
         time: new Date()
     });
 }
 
-async function createWallet(member: string) {
-    await setBalance(member, config.DEFAULT_MONEY);
+async function createWallet(user: string) {
+    await setBalance(user, config.DEFAULT_MONEY);
 }
 
-export async function getBalance(member: string) {
-    const query = await getDoc(doc(db, "wallets", member));
+export async function getBalance(user: string) {
+    const query = await getDoc(doc(db, "wallets", user));
     if (query.exists()) {
         return roundNumber(query.data().balance);
     } else {
-        createWallet(member);
+        createWallet(user);
         return config.DEFAULT_MONEY;
     }
 }
 
-export async function setBalance(member: string, amount: number) {
-    await setDoc(doc(db, "wallets", member), {balance: amount});
+export async function setBalance(user: string, amount: number) {
+    await setDoc(doc(db, "wallets", user), {balance: amount});
 }
 
-export async function addBalance(member: string, amount: number) {
-    const balance = await getBalance(member);
-    await setBalance(member, balance + amount);
+export async function addBalance(user: string, amount: number) {
+    const balance = await getBalance(user);
+    await setBalance(user, balance + amount);
 }
 
-export async function pay(member: string, target: string, amount: number) {
-    addBalance(member, - amount);
+export async function pay(user: string, target: string, amount: number) {
+    addBalance(user, - amount);
     addBalance(target, amount);
     return await addDoc(collection(db, "transactions"), {
-        member,
+        user,
         target,
         amount,
         time: new Date()
@@ -64,12 +64,12 @@ export async function pay(member: string, target: string, amount: number) {
 }
 
 export async function adminPay(target: string, amount: number) {
-    return await pay(config.ADMIN_ID, target, amount);
+    return await pay("ADMIN", target, amount);
 }
 
-export async function getMemberCommands(member: string, limit: number, command: string | undefined = undefined) {
+export async function getMemberCommands(user: string, limit: number, command: string | undefined = undefined) {
     const query = await getDocs(collection(db, "commands"));
-    return query.docs.filter(doc => doc.data().member == member && (command ? doc.data().command == command : true)).slice(0, limit);
+    return query.docs.filter(doc => doc.data().user == user && (command ? doc.data().command == command : true)).slice(0, limit);
 }
 
 // Round the number to 2 decimals
@@ -77,16 +77,16 @@ export function roundNumber(number: number) {
     return Math.round(number * 100) / 100;
 }
 
-export async function paycheck(member: string) {
-    const res = await adminPay(member, config.DEFAULT_PAYCHECK);
+export async function paycheck(user: string) {
+    const res = await adminPay(user, config.DEFAULT_PAYCHECK);
     await addDoc(collection(db, "paydays"), {
-        member,
+        user,
         time: new Date(),
         transaction: res.id
     });
 }
 
-export async function getLastPayday(member: string) {
+export async function getLastPayday(user: string) {
     const query = await getDocs(collection(db, "paydays"));
-    return query.docs.filter(doc => doc.data().member == member).slice(0, 1);
+    return query.docs.filter(doc => doc.data().user == user).slice(0, 1);
 }

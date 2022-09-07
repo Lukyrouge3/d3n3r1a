@@ -25,7 +25,7 @@ const cmd = new Command('uberfinn', 'Creates an order for Finn to deliver', asyn
     embed.setColor(0x00FF00);
     embed.setFooter({text: `Ordered by ${i.member.displayName}`, iconURL: finn.avatarURL()});
     embed.setTimestamp(new Date());
-    i.reply({embeds: [embed], ephemeral: true});
+    i.reply({embeds: [embed]});
     const id = randomId();
     const row = new ActionRowBuilder().addComponents(new ButtonBuilder().setCustomId(id).setLabel("Accept").setStyle(ButtonStyle.Success));
     const msg = await finn.send({content: `You have a new order from ${i.member.displayName}`, embeds: [embed], components: [row]});

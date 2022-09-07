@@ -28,21 +28,27 @@ const cmd = new Command('uberfinn', 'Creates an order for Finn to deliver', asyn
     i.reply({embeds: [embed]});
     const id = randomId();
     const row = new ActionRowBuilder().addComponents(new ButtonBuilder().setCustomId(id).setLabel("Accept").setStyle(ButtonStyle.Success));
-    embed.setFields([
+
+    const embed2 = new EmbedBuilder();
+    embed2.setTitle('Uber Finn Order');
+    embed2.setColor(0x00FF00);
+    embed2.setFooter({text: `Ordered by ${i.member.displayName}`, iconURL: finn.avatarURL()});
+    embed2.setTimestamp(new Date())
+    embed2.setFields([
         {name: 'Price', value: `${price} CHF`},
         {name: 'Order', value: order},
         {name: 'Tip', value: `${tip ? tip : 0} CHF`},
         {name: 'Pickup Location', value: location},
         {name: 'Delivery Address', value: address}
     ]);
-    const msg = await finn.send({content: `You have a new order from ${i.member.displayName}`, embeds: [embed], components: [row]});
+    const msg = await finn.send({content: `You have a new order from ${i.member.displayName}`, embeds: [embed2], components: [row]});
 
     const filter = (i2) => i2.customId === id;
     const collector = finn.user.dmChannel.createMessageComponentCollector({filter, time: 3600000});
     collector.on('collect', async i2 => {
         i.editReply({content: 'Order accepted', embeds: [embed], components: []});
         i.user.send("Order accepted");
-        msg.edit({content: 'Order accepted', embeds: [embed], components: []});
+        msg.edit({content: 'Order accepted', embeds: [embed2], components: []});
     });
 });
 

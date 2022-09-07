@@ -1,16 +1,13 @@
 import {isNSFWChannel} from "./helpers";
 import {deploy} from "./commands_deployer";
 import {REST} from '@discordjs/rest';
-import {Client, Collection, GuildMember, Intents} from "discord.js";
-import {ApplicationCommandPermissionTypes} from "discord.js/typings/enums";
-import {addCommand} from "./apis/database";
+import {ActivityType, Client, Collection, GuildMember, IntentsBitField} from "discord.js";
+import {addCommand} from "./apis/firebase";
 
 require('dotenv').config(); // DOTENV setup
 require('./web.ts');
 
 console.time("Time to start");
-
-if (process.env.DEV_ENVIRONNEMENT == "True") console.log("DEVELOPMENT ENVIRONNEMENT !");
 
 class CustomClient extends Client {
     public commands: Collection<string, any>;
@@ -21,13 +18,12 @@ class CustomClient extends Client {
 }
 
 const rest = new REST({version: '10'}).setToken(process.env.TOKEN);
-const client = new CustomClient({intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_VOICE_STATES]});
+const client = new CustomClient({intents: [IntentsBitField.Flags.Guilds, IntentsBitField.Flags.GuildMessageReactions, IntentsBitField.Flags.GuildVoiceStates, IntentsBitField.Flags.DirectMessages, IntentsBitField.Flags.GuildIntegrations]});
 
 (async () => {
     console.log('Started deploying commands.');
 
     await deploy(rest, client);
-
     console.log(`Successfully loaded ${client.commands.size} commands.`);
 
 })();
@@ -35,6 +31,11 @@ const client = new CustomClient({intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.G
 
 client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
+    if (process.env.DEV_ENVIRONNEMENT == "True") {
+        console.log("DEVELOPMENT ENVIRONNEMENT !");
+        client.user.setActivity("in development", {type: ActivityType.Playing});
+        client.user.setStatus("dnd");
+    } else client.user.setActivity("Made with ❤ by @Lukyrouge", {type: ActivityType.Listening});
     console.timeEnd("Time to start");
 });
 
@@ -44,15 +45,16 @@ client.on('interactionCreate', async (interaction) => {
     const command = client.commands.get(interaction.commandName);
 
     if (!command) return;
-    if (process.env.DEV_ENVIRONNEMENT == "False") {
-        // Datetime, member, guild, command
-        if (interaction.member instanceof GuildMember)
-            addCommand(interaction.member.id, interaction.guild.id, interaction.commandName);
-    }
+    // if (process.env.DEV_ENVIRONNEMENT == "False") {
+    // Datetime, member, guild, command
+
+    // }
 
     try {
-        if (!interaction.options.getBoolean("private", false) && command.isNSFW && !await isNSFWChannel(interaction)) return;
+        // if (!interaction.options.getBoolean("private", false) && command.isNSFW && !await isNSFWChannel(interaction)) return;
         await command.execute(interaction);
+        if (interaction.member instanceof GuildMember)
+            addCommand(interaction.commandName, interaction.guild.id, interaction.member.id, null);
     } catch (error) {
         console.error(error);
         await interaction.reply({content: 'There was an error while executing this command!', ephemeral: true});

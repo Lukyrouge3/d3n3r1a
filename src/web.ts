@@ -3,7 +3,6 @@ import createError from 'http-errors';
 import express from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
-import logger from 'morgan';
 
 const app = express();
 const indexRouter = require('./routes/index');
@@ -17,7 +16,6 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());

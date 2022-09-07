@@ -1,7 +1,7 @@
 import {Command} from "../../command";
-import {CommandInteraction, Permissions, TextChannel} from "discord.js";
+import {ChatInputCommandInteraction, CommandInteraction, Permissions, TextChannel} from "discord.js";
 
-const cmd = new Command('clear', 'Clears the desired number of messages', async (i: CommandInteraction) => {
+const cmd = new Command('clear', 'Clears the desired number of messages', async (i: ChatInputCommandInteraction) => {
     const count = i.options.getNumber("count");
     // @ts-ignore
     if (i.channel instanceof TextChannel) {

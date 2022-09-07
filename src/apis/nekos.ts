@@ -1,7 +1,6 @@
 import request from "snekfetch";
 import {Command} from "../command";
-import {CommandInteraction, GuildMember, MessageEmbed} from "discord.js";
-import {capitalize} from "../helpers";
+import {ChatInputCommandInteraction, EmbedBuilder, GuildMember} from "discord.js";
 
 const NSFW = ['femdom', 'classic', 'erofeet', 'erok', 'les', 'hololewd', 'lewdk', 'keta', 'feetg', 'nsfw_neko_gif', 'eroyuri', 'kuni', 'tits', 'pussy_jpg', 'cum_jpg', 'pussy', 'lewdkemo', 'lewd', 'cum', 'spank', 'smallboobs', 'nsfw_avatar', 'boobs', 'solog', 'bj', 'yuri', 'anal', 'blowjob', 'holoero', 'gasm', 'hentai', 'ero', 'solo', 'pwankg', 'eron', 'erokemo'];
 const SFW = ['tickle', 'hug', 'ngif', 'meow', 'poke', 'kiss', 'slap', 'cuddle', 'fox_girl', 'gecg', 'pat', 'smug', 'kemonomimi', 'holo', 'woof', 'baka', 'feed', 'neko', 'waifu', 'avatar'];
@@ -29,11 +28,11 @@ function generateCommand(str: string, nsfw = false): Command {
     return c;
 }
 
-async function execute(interaction: CommandInteraction) {
+async function execute(interaction: ChatInputCommandInteraction) {
     request.get('https://nekos.life/api/v2/img/' + interaction.commandName).then(async r => {
-        let target = interaction.options.getMentionable('target', false);
+        let target = interaction.options.getMentionable('target');
 
-        let embed = new MessageEmbed().setDescription(`**Here is for u ${target instanceof GuildMember ? target.toString() : 'Master'} !**`).setImage(r.body.url).setColor(0xFFFFFF);
+        let embed = new EmbedBuilder().setDescription(`**Here is for u ${target instanceof GuildMember ? target.toString() : 'Master'} !**`).setImage(r.body.url).setColor(0xFFFFFF);
         await interaction.reply({embeds: [embed], ephemeral: interaction.options.getBoolean("private", false)});
     });
 }

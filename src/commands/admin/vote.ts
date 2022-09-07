@@ -1,9 +1,9 @@
 import {Command} from "../../command";
-import {CommandInteraction, Message, MessageEmbed} from "discord.js";
+import {ChatInputCommandInteraction, CommandInteraction, EmbedBuilder, Message} from "discord.js";
 
 const emojis = ["1️⃣", "2️⃣", "3️⃣", "4️⃣"];
 
-const cmd = new Command('vote', 'Starts a vote', async (i: CommandInteraction) => {
+const cmd = new Command('vote', 'Starts a vote', async (i: ChatInputCommandInteraction) => {
     const question = i.options.getString("question");
     const option1 = i.options.getString("option1");
     const option2 = i.options.getString("option2");
@@ -22,7 +22,7 @@ const cmd = new Command('vote', 'Starts a vote', async (i: CommandInteraction) =
     const imagesEmbeds = [];
     if (image) {
         options.forEach((o, i) => {
-            imagesEmbeds.push(new MessageEmbed().setURL("https://deneria.net/").setImage(o).setTitle(question).setFooter("You can click the image to see it in full size"));
+            imagesEmbeds.push(new EmbedBuilder().setURL("https://deneria.net/").setImage(o).setTitle(question).setFooter({text: "You can click the image to see it in full size"}));
             options[i] = `Image ${i + 1}`;
         });
 

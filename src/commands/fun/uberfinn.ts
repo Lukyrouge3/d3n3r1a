@@ -20,7 +20,7 @@ const cmd = new Command('uberfinn', 'Creates an order for Finn to deliver', asyn
         {name: 'Order', value: order},
         {name: 'Tip', value: `${tip ? tip : 0} CHF`},
         {name: 'Pickup Location', value: location},
-        {name: 'Delivery Address', value: address}
+        {name: 'Delivery Address', value: "Censored"}
     ]);
     embed.setColor(0x00FF00);
     embed.setFooter({text: `Ordered by ${i.member.displayName}`, iconURL: finn.avatarURL()});
@@ -28,6 +28,13 @@ const cmd = new Command('uberfinn', 'Creates an order for Finn to deliver', asyn
     i.reply({embeds: [embed]});
     const id = randomId();
     const row = new ActionRowBuilder().addComponents(new ButtonBuilder().setCustomId(id).setLabel("Accept").setStyle(ButtonStyle.Success));
+    embed.setFields([
+        {name: 'Price', value: `${price} CHF`},
+        {name: 'Order', value: order},
+        {name: 'Tip', value: `${tip ? tip : 0} CHF`},
+        {name: 'Pickup Location', value: location},
+        {name: 'Delivery Address', value: address}
+    ]);
     const msg = await finn.send({content: `You have a new order from ${i.member.displayName}`, embeds: [embed], components: [row]});
 
     const filter = (i2) => i2.customId === id;

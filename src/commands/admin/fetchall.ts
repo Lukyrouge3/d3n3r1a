@@ -42,6 +42,10 @@ const cmd = new Command('fetchall', 'Count and store all messages from a channel
     }
 
     i.editReply(`There is ${messages.length} messages in this channel.\nTime taken: ${Date.now() - time}ms`);
+    // if directory doesn't exist, create it
+    if (!fs.existsSync(`./messages`)) {
+        fs.mkdirSync(`./messages`);
+    }
     fs.writeFileSync(`./messages/${i.channel.id}.json`, JSON.stringify(messages));
 });
 

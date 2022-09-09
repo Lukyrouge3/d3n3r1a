@@ -1,0 +1,29 @@
+html
+    head
+        title Messages
+        script(src="https://unpkg.com/wc-discord-message@^2.0.0/dist/wc-discord-message/wc-discord-message.js")
+        script
+            | function toBottom()
+            |{
+            |    window.scrollTo(0, document.body.scrollHeight);
+            |}
+            |    window.onload=toBottom;
+        link(rel="stylesheet" href="/stylesheets/messages.css")
+    body
+        discord-messages
+            each message in messages
+                discord-message(author=message.authorName, avatar=message.authorAvatar, timestamp=message.date, role-color=message.roleColor, edited=message.editedTimestamp != null)
+                    | #{message.content}
+                    //if (message.attachments.length > 0)
+                    //    img(src=message.attachments[0].url)
+                    if (message.embeds.length > 0)
+                        each embed in message.embeds
+                            discord-embed(slot="embeds", image=(embed.image ? embed.image.url : unedefined), embed-title=embed.title, color=(embed.color ? (embed.color).toString(16).padStart(6, '0').toUpperCase() : "#000000"))
+                                | #{embed.description}
+                                if (embed.fields)
+                                    discord-embed-fields(slot="fields")
+                                        each field in embed.fields
+                                            discord-embed-field(field-title=field.name, inline=field.inline)
+                                                | #{field.value}
+                                if (embed.footer)
+                                    span(slot="footer") #{embed.footer.text}

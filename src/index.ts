@@ -18,7 +18,14 @@ class CustomClient extends Client {
 }
 
 const rest = new REST({version: '10'}).setToken(process.env.TOKEN);
-const client = new CustomClient({intents: [IntentsBitField.Flags.Guilds, IntentsBitField.Flags.GuildMessageReactions, IntentsBitField.Flags.GuildVoiceStates, IntentsBitField.Flags.DirectMessages, IntentsBitField.Flags.GuildIntegrations]});
+const client = new CustomClient({
+    intents: [IntentsBitField.Flags.Guilds,
+        IntentsBitField.Flags.GuildMessageReactions,
+        IntentsBitField.Flags.GuildVoiceStates,
+        IntentsBitField.Flags.DirectMessages,
+        IntentsBitField.Flags.GuildIntegrations,
+    ], allowedMentions: {parse: ['roles', "everyone"]}
+});
 
 (async () => {
     console.log('Started deploying commands.');
